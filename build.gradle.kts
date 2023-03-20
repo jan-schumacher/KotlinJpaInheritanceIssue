@@ -14,9 +14,14 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
+    maven ( url = "https://repo.spring.io/libs-release" )
+    maven ( url = "https://repo.spring.io/libs-milestone" )
+    maven ( url = "https://repo.spring.io/libs-snapshot" )
 }
 
 dependencies {
+    implementation("org.springframework.data:spring-data-commons:3.1.0-M2")
+    implementation("org.springframework.data:spring-data-jpa:3.1.0-M2")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
