@@ -1,7 +1,7 @@
 package bugs
 
-import jakarta.persistence.EntityManagerFactory
-import jakarta.persistence.Persistence
+import javax.persistence.EntityManagerFactory
+import javax.persistence.Persistence
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -44,7 +44,8 @@ class JPAUnitTestCase {
         // creating new entityManager to simulate a new context/threat
         val newEm = entityManagerFactory.createEntityManager()
         println("load from database (see logs for prove)")
-        val newResult = newEm.find(Entity2::class.java, entity2.id)
+        val query = newEm.createQuery("select e2 from Entity2 e2")
+        val newResult = query.resultList.first() as Entity2
         Assert.assertEquals("lateinitValue", newResult.lateinitValue)
         Assert.assertEquals("constructorValue", newResult.constructorValue)
 

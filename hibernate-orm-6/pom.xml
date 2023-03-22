@@ -10,7 +10,7 @@
     <properties>
         <version.com.h2database>2.1.214</version.com.h2database>
         <version.junit>4.13.2</version.junit>
-        <version.org.hibernate>6.1.7.Final</version.org.hibernate>
+        <version.org.hibernate>5.6.15.Final</version.org.hibernate>
         <kotlin.version>1.8.10</kotlin.version>
     </properties>
 
@@ -21,12 +21,12 @@
             <version>${kotlin.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.orm</groupId>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${version.org.hibernate}</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.orm</groupId>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-testing</artifactId>
             <version>${version.org.hibernate}</version>
         </dependency>
