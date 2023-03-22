@@ -27,7 +27,7 @@ class JPAUnitTestCase {
     // Add your tests, using standard JUnit.
     @Test
     @Throws(Exception::class)
-    fun hhh123Test() {
+    fun hhh15874Test() {
         val em = entityManagerFactory.createEntityManager()
         em.transaction.begin()
         val entity2 = Entity2("value1Example", "value2Example")
