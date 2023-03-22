@@ -6,12 +6,12 @@ import java.util.*
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 abstract class Entity1(
-    @Column open var constructorValue: String
+    @get:Column open var constructorValue: String
 ) {
-    @Column
+    @get:Column
     open lateinit var lateinitValue: String
 
-    @Id var id = UUID.randomUUID()
+    @get:Id var id = UUID.randomUUID()
 }
 
 @Entity
