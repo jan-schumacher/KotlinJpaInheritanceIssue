@@ -17,11 +17,10 @@ class HibernateImplementationTests {
 
     @Test
     fun testWithSameEntityManager() {
-        val sessionFactory = entityManaFactory.unwrap(SessionFactory::class.java)
-        val entity2 = Entity2("value1Example", "value2Example")
         val em = entityManaFactory.createEntityManager()
         em.transaction.begin()
 
+        val entity2 = Entity2("value1Example", "value2Example")
         em.persist(entity2)
         em.transaction.commit()
 
@@ -34,15 +33,16 @@ class HibernateImplementationTests {
 
     @Test
     fun testWithNewEntityManager() {
-        val sessionFactory = entityManaFactory.unwrap(SessionFactory::class.java)
-        val entity2 = Entity2("value1Example", "value2Example")
         val em = entityManaFactory.createEntityManager()
         em.transaction.begin()
 
+        val entity2 = Entity2("value1Example", "value2Example")
         em.persist(entity2)
         em.transaction.commit()
 
-        val simpleJpaRepository = SimpleJpaRepository<Entity2, UUID>(Entity2::class.java, sessionFactory.createEntityManager())
+        val simpleJpaRepository = SimpleJpaRepository<Entity2, UUID>(
+            Entity2::class.java, entityManaFactory.createEntityManager()
+        )
 
         val result = simpleJpaRepository.getReferenceById(entity2.id)
         Assertions.assertEquals("value1Example", result.value1)
