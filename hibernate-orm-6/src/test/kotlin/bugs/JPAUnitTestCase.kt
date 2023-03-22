@@ -30,22 +30,23 @@ class JPAUnitTestCase {
     fun hhh15874Test() {
         val em = entityManagerFactory.createEntityManager()
         em.transaction.begin()
-        val entity2 = Entity2("value1Example", "value2Example")
+        val entity2 = Entity2("constructorValue")
+        entity2.lateinitValue = "lateinitValue"
         em.persist(entity2)
         em.transaction.commit()
 
         println("load from cache (returns the same object as persisted)")
         val result = em.find(Entity2::class.java, entity2.id)
         Assert.assertTrue(entity2 == result)
-        Assert.assertEquals("value1Example", result.value1)
-        Assert.assertEquals("value2Example", result.value2)
+        Assert.assertEquals("lateinitValue", result.lateinitValue)
+        Assert.assertEquals("constructorValue", result.constructorValue)
 
         // creating new entityManager to simulate a new context/threat
         val newEm = entityManagerFactory.createEntityManager()
         println("load from database (see logs for prove)")
         val newResult = newEm.find(Entity2::class.java, entity2.id)
-        Assert.assertEquals("value1Example", newResult.value1)
-        Assert.assertEquals("value2Example", newResult.value2)
+        Assert.assertEquals("lateinitValue", newResult.lateinitValue)
+        Assert.assertEquals("constructorValue", newResult.constructorValue)
 
         newEm.close()
         em.close()
